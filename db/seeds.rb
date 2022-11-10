@@ -1,10 +1,10 @@
 # Creating users:
-codetombomb = User.create(username: "codetombomb", email: "codetombomb@gmail.com", password: "codetombomb")
-eri_is_cool = User.create(username: 'eriiscool', email: 'eriiscool@gmail.com', password: "eriiscool")
+# codetombomb = User.create(username: "codetombomb", email: "codetombomb@gmail.com", password: "codetombomb")
+# eri_is_cool = User.create(username: 'eriiscool', email: 'eriiscool@gmail.com', password: "eriiscool")
 
 # Bcrypt users - added password_confirmation
-# codetombomb = User.create(username: "codetombomb", email: "codetombomb@gmail.com", password: "codetombomb", password_confirmation: "codetombomb")
-# eri_is_cool = User.create(username: 'eriiscool', email: 'eriiscool@gmail.com', password: "eriiscool", password_confirmation: "eriiscool")
+codetombomb = User.create(username: "codetombomb", email: "codetombomb@gmail.com", password: "codetombomb", password_confirmation: "codetombomb")
+eri_is_cool = User.create(username: 'eriiscool', email: 'eriiscool@gmail.com', password: "eriiscool", password_confirmation: "eriiscool")
 
 # Creating categories:
 fishing = Category.create(name: "fishing")

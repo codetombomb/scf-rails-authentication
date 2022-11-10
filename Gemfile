@@ -34,3 +34,5 @@ gem "pry", "~> 0.14.1"
 gem "faker", "~> 3.0"
 
 gem "active_model_serializers", "~> 0.10.13"
+
+gem "bcrypt", "~> 3.1"

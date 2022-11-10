@@ -1,8 +1,13 @@
 Rails.application.routes.draw do
   resources :items, only: [:index, :show]
-  resources :users, only: [:index, :show]
+  resources :users, only: [:index]
   resources :categories, only: [:index, :show]
+  
+  get '/me', to: "users#show"
+  post '/signup', to: "users#create"
+  post '/login', to: "sessions#create"
+  delete '/logout', to: "sessions#destroy"
 
-  get '/hello', to: 'application#hello_world'
+  # get '/hello', to: 'application#hello_world'
 
 end
