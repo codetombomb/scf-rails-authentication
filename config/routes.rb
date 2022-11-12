@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'sessions/create'
+  get 'sessions/delete'
   resources :items, only: [:index, :show]
   resources :users, only: [:index]
   resources :categories, only: [:index, :show]
