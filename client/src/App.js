@@ -11,21 +11,42 @@ function App() {
   const [user, setUser] = useState({
     username: ""
   })
+  const [loggedIn, setLoggedIn] = useState(false)
   const [errors, setErrors] = useState([])
+  const [items, setItems] = useState([])
 
-  // useEffect(() => {
-  //   fetch('/me')
-  //     .then((resp) => resp.json())
-  //     .then((data) => console.log(data))
-  // }, [])
+  useEffect(() => {
+    fetch('/items')
+      .then((resp) => resp.json())
+      .then((data) => setItems(data))
+  }, [])
+
+  useEffect(() => {
+    fetch('/me')
+      .then(resp => {
+        if(resp.ok){
+          resp.json().then(user => {
+            setLoggedIn(true)
+            setUser(user)
+          })
+        } else {
+          resp.json().then(err => setErrors(err))
+        }
+      })
+  }, [])
+
+  const handleUserUpdate = (user) => {
+    setUser(user)
+    setLoggedIn((prevValue) => !prevValue)
+  }
 
   return (
     <div className="App">
-      <NavBar setUser={setUser}/>
+      <NavBar setUser={setUser} setLoggedIn={setLoggedIn} loggedIn={loggedIn}/>
       <Routes>
-        <Route path="/" element={<Home user={user}/>} />
-        <Route path="/signup" element={<Signup setUser={setUser}/>} />
-        <Route path="/login" element={<Login errors={errors} setErrors={setErrors} setUser={setUser}/>} />
+        <Route path="/" element={<Home user={user} items={items} loggedIn={loggedIn}/>} />
+        <Route path="/signup" element={<Signup setUser={handleUserUpdate}/>} />
+        <Route path="/login" element={<Login errors={errors} setErrors={setErrors} setUser={handleUserUpdate} setLoggedIn={setLoggedIn}/>} />
       </Routes>
     </div>
   );

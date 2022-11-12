@@ -10,7 +10,7 @@ import {
 }
 from 'mdb-react-ui-kit';
 
-function Login({ setUser, setErrors, errors }) {
+function Login({ setUser, setErrors, errors, setLoggedIn }) {
     const [loginCredentials, setLoginCredentials] = useState({
         username: '',
         password: ''
@@ -39,6 +39,7 @@ function Login({ setUser, setErrors, errors }) {
                     return resp.json().then(user => {
                         navigate("/")
                         setUser(user)
+                        setLoggedIn(true)
                     })
                 } else {
                     resp.json().then(({ errors }) => setErrors(errors))
@@ -83,9 +84,9 @@ function Login({ setUser, setErrors, errors }) {
     
             </div>
           </div>
-            {errors.map(err => {
+            {/* {errors.map(err => {
                 return <div style={{color: "red"}}>{err}</div>
-            })}
+            })} */}
         </MDBContainer>
       );
 }

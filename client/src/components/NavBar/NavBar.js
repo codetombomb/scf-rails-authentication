@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   MDBContainer,
   MDBNavbar,
@@ -12,8 +12,9 @@ import {
   MDBCollapse,
 } from "mdb-react-ui-kit";
 
-function NavBar({ setUser }) {
+function NavBar({ setUser, setLoggedIn, loggedIn }) {
   const [showBasic, setShowBasic] = useState(false);
+  const navigate = useNavigate()
 
   const handleLogoutClick = () => {
     const config = {
@@ -22,7 +23,8 @@ function NavBar({ setUser }) {
 
     fetch("/logout", config).then((resp) => {
       setUser({ username: "" });
-      console.log(resp);
+      setLoggedIn(false)
+      navigate('/login')
     });
   };
 
@@ -43,10 +45,10 @@ function NavBar({ setUser }) {
         <MDBCollapse navbar show={showBasic}>
           <MDBNavbarNav className="mr-auto mb-2 mb-lg-0">
             <MDBNavbarItem>
-              <Link to="/">Home</Link>
+              {loggedIn ? <Link to="/">Home</Link> : null}
             </MDBNavbarItem>
             <MDBNavbarItem>
-              <Link to="/login">Login</Link>
+              {loggedIn ? null : <Link to="/login">Login</Link>}
             </MDBNavbarItem>
             {/* </MDBNavbarItem>
                 <MDBNavbarItem>
@@ -59,7 +61,7 @@ function NavBar({ setUser }) {
               <Link onClick={handleLogoutClick}>Logout</Link>
             </MDBNavbarItem>
             <MDBNavbarItem>
-              <Link to="/signup">Sign up</Link>
+              {loggedIn ? null : <Link to="/signup">Sign up</Link>}
             </MDBNavbarItem>
           </MDBNavbarNav>
         </MDBCollapse>

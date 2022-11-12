@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  skip_before_action :authorize
+
   # /login
   def create
     # Receive the username and password
